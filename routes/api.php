@@ -1,30 +1,30 @@
 <?php
 
 use App\Http\Controllers\Auth\FuncionarioAuthController;
-use App\Http\Controllers\Auth\ClienteAuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 // Rotas públicas
-Route::post('/clientes/login', [ClienteAuthController::class, 'login']);
-Route::post('/admins/login', [FuncionarioAuthController::class, 'login']);
+Route::post('/clientes/login', [AuthController::class, 'loginCliente']);
+Route::post('/admins/login', [AuthController::class, 'loginFuncionario']);
 
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::get('/produtos/{id}', [ProdutoController::class, 'show']);
 
+Route::post('/clientes', [ClienteController::class, 'store']);
+
 // Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/clientes/logout', [ClienteAuthController::class, 'logout']);
-    Route::post('/admins/logout', [FuncionarioAuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     // Clientes
-    Route::get('/clientes', [ClienteAuthController::class, 'index']);
-    Route::get('/clientes/{id}', [ClienteAuthController::class, 'show']);
-    Route::post('/clientes', [ClienteAuthController::class, 'store']);
-    Route::put('/clientes/{id}', [ClienteAuthController::class, 'update']);
-    Route::delete('/clientes/{id}', [ClienteAuthController::class, 'destroy']);
+    Route::get('/clientes', [ClienteController::class, 'index']);
+    Route::get('/clientes/{id}', [ClienteController::class, 'show']);
+    Route::put('/clientes/{id}', [ClienteController::class, 'update']);
+    Route::delete('/clientes/{id}', [ClienteController::class, 'destroy']);
 
     // Funcionarios
     Route::get('/admins', [FuncionarioController::class, 'index']);
