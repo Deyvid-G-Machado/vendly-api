@@ -21,10 +21,15 @@ class Cliente extends Authenticatable
         'telefone',
     ];
 
-    protected $hidden = ['senha'];
+    protected $hidden = ['senha', 'remember_token',];
 
     public function endereco()
     {
         return $this->hasOne(Endereco::class);
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->senha;
     }
 }

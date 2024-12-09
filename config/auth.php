@@ -44,6 +44,10 @@ return [
             'driver' => 'sanctum',
             'provider' => 'funcionarios',
         ],
+        'cliente' => [
+            'driver' => 'sanctum',
+            'provider' => 'clientes',
+        ],
     ],
 
     'providers' => [
@@ -54,6 +58,10 @@ return [
         'funcionarios' => [
             'driver' => 'eloquent',
             'model' => App\Models\Funcionario::class,
+        ],
+        'clientes' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Cliente::class,
         ],
     ],
 
